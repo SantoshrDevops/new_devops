@@ -6,6 +6,7 @@ pipeline {
 				steps {
 					echo 'Hello master'
 					sh 'git clone https://github.com/sachin93094/maven-web-application.git' 
+					ls
 					
 					}
 				}
