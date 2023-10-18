@@ -40,3 +40,23 @@ try:
     print(f"Latest tag for '{clone_directory2}': {latest_tag2}")
 except git.exc.GitCommandError as e:
     print(f"Error getting the latest tag for '{clone_directory2}': {e}")
+    
+    
+# Define the name of the new tag
+new_tag_name = "v3.0.0"
+
+# Create and push the new tag for the first repository
+try:
+    tag1 = repo1.create_tag(new_tag_name, message="Created a new tag")
+    repo1.git.push("--tags")
+    print(f"Created and pushed tag '{new_tag_name}' for '{clone_directory1}'")
+except git.exc.GitCommandError as e:
+    print(f"Error creating/pushing the tag for '{clone_directory1}': {e}")
+
+# Create and push the new tag for the second repository
+try:
+    tag2 = repo2.create_tag(new_tag_name, message="Created a new tag")
+    repo2.git.push("--tags")
+    print(f"Created and pushed tag '{new_tag_name}' for '{clone_directory2}'")
+except git.exc.GitCommandError as e:
+    print(f"Error creating/pushing the tag for '{clone_directory2}': {e}")
