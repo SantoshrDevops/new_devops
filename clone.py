@@ -9,6 +9,6 @@ clone_directory = "private_Repo"
 # Clone the repository
 try:
     subprocess.check_call(["git", "clone", repository_url, clone_directory])
-    print("Repository cloned successfully.")
+    print("Repository cloned successfully in teamcity.")
 except subprocess.CalledProcessError as e:
     print(f"Repository cloning failed: {e}")
