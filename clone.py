@@ -1,5 +1,4 @@
-import git
-import os
+import subprocess
 
 # Define the SSH URL of the Git repository to clone
 repository_url = "git@github.com:sachin93094/private_Repo.git"
@@ -8,8 +7,8 @@ repository_url = "git@github.com:sachin93094/private_Repo.git"
 clone_directory = "private_Repo"
 
 # Clone the repository
-if not os.path.exists(clone_directory):
-    git.Repo.clone_from(repository_url, clone_directory)
-    print(f"Repository cloned successfully.")
-else:
-    print(f"Repository '{clone_directory}' already exists. Skipping clone.")
+try:
+    subprocess.check_call(["git", "clone", repository_url, clone_directory])
+    print("Repository cloned successfully.")
+except subprocess.CalledProcessError as e:
+    print(f"Repository cloning failed: {e}")
