@@ -1,6 +1,14 @@
 import subprocess
 import git
 
+# Define your Git identity (update with your information)
+git_name = "sachin93093"
+git_email = "sachin93093@gmail.com"
+
+# Set your Git identity globally
+subprocess.check_call(["git", "config", "--global", "user.name", git_name])
+subprocess.check_call(["git", "config", "--global", "user.email", git_email])
+
 # Define the SSH URL of the first Git repository to clone
 repository_url1 = "git@github.com:sachin93094/private_Repo.git"
 clone_directory1 = "private_Repo"
@@ -40,8 +48,7 @@ try:
     print(f"Latest tag for '{clone_directory2}': {latest_tag2}")
 except git.exc.GitCommandError as e:
     print(f"Error getting the latest tag for '{clone_directory2}': {e}")
-    
-    
+
 # Define the name of the new tag
 new_tag_name = "v3.0.0"
 
