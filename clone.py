@@ -1,4 +1,5 @@
 import subprocess
+import git
 
 # Define the SSH URL of the first Git repository to clone
 repository_url1 = "git@github.com:sachin93094/private_Repo.git"
@@ -21,3 +22,13 @@ try:
     print(f"Repository '{clone_directory2}' cloned successfully.")
 except subprocess.CalledProcessError as e:
     print(f"Repository cloning failed: {e}")
+
+# Get the latest tag for the first repository
+repo1 = git.Repo(clone_directory1)
+latest_tag1 = repo1.git.describe(tags=True, abbrev=0)
+print(f"Latest tag for '{clone_directory1}': {latest_tag1}")
+
+# Get the latest tag for the second repository
+repo2 = git.Repo(clone_directory2)
+latest_tag2 = repo2.git.describe(tags=True, abbrev=0)
+print(f"Latest tag for '{clone_directory2}': {latest_tag2}")
