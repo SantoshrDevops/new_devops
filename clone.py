@@ -1,6 +1,6 @@
 import subprocess
 import git
-from git import RemoteProgress
+import os  # Import the os module to access environment variables
 
 # Define your Git identity (update with your information)
 git_name = "sachin93093"
@@ -11,7 +11,14 @@ subprocess.check_call(["git", "config", "--global", "user.name", git_name])
 subprocess.check_call(["git", "config", "--global", "user.email", git_email])
 
 # Define the HTTP URL of the first Git repository to clone
-repository_url1 = "https://github.com/sachin93094/private_Repo.git"  # Update with the HTTP URL
+# Retrieve username and password from TeamCity environment variables
+username = os.environ.get('username')  # Replace 'TC_USERNAME' with your actual environment variable name
+password = os.environ.get('password')  # Replace 'TC_PASSWORD' with your actual environment variable name
+
+# Construct the repository URL with credentials
+repository_url1 = f"https://{username}:{password}@github.com/sachin93094/private_Repo.git"
+
+# Update with the HTTP URL and use the constructed repository URL
 clone_directory1 = "private_Repo"
 
 # Clone the first repository
@@ -31,7 +38,14 @@ except git.exc.GitCommandError as e:
     print(f"Error getting the latest tag for '{clone_directory1}': {e}")
 
 # Define the HTTP URL of the second Git repository to clone
-repository_url2 = "https://github.com/sachin93094/git_remote_demorepo1.git"  # Update with the HTTP URL
+# Retrieve the username and password from TeamCity environment variables
+username = os.environ.get('TC_USERNAME')  # Replace 'TC_USERNAME' with your actual environment variable name
+password = os.environ.get('TC_PASSWORD')  # Replace 'TC_PASSWORD' with your actual environment variable name
+
+# Construct the repository URL with credentials
+repository_url2 = f"https://{username}:{password}@github.com/sachin93094/git_remote_demorepo1.git"
+
+# Update with the HTTP URL and use the constructed repository URL
 clone_directory2 = "git_remote_demorepo1"
 
 # Clone the second repository
