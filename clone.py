@@ -2,6 +2,8 @@ import subprocess
 import git
 import os  # Import the os module to access environment variables
 
+if not os.path.exists(clone_directory2):
+    os.makedirs(clone_directory2)
 # Define your Git identity (update with your information)
 git_name = "sachin93093"
 git_email = "sachin93093@gmail.com"
