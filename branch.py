@@ -1,13 +1,24 @@
 import subprocess
 import sys
 
+def set_origin_remote(url):
+    try:
+        # Check if 'origin' remote exists
+        subprocess.run(['git', 'remote', 'get-url', 'origin'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # If 'origin' remote exists, update its URL
+        subprocess.run(['git', 'remote', 'set-url', 'origin', url], check=True)
+    except subprocess.CalledProcessError:
+        # If 'origin' remote does not exist, add it
+        subprocess.run(['git', 'remote', 'add', 'origin', url], check=True)
+
 def get_latest_git_branch():
     try:
         # Set the remote repository URL with the personal access token
         remote_url = 'https://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@github.com/sachinsdevops/sample_teamcity.git'
 
-        # Set up the Git remote with the URL
-        subprocess.run(['git', 'remote', 'add', 'origin', remote_url], check=True)
+        # Set up the 'origin' remote with the URL
+        set_origin_remote(remote_url)
 
         # Fetch all remote branches
         subprocess.run(['git', 'fetch', '--all'], check=True)
