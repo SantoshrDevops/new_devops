@@ -3,8 +3,14 @@ import sys
 
 def get_latest_git_branch():
     try:
-        # Fetch all remote branches using the HTTP URL and personal access token
-        subprocess.run(['git', 'fetch', '--all', 'https://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@github.com/sachinsdevops/sample_teamcity.git'], check=True)
+        # Set the remote repository URL with the personal access token
+        remote_url = 'https://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@github.com/sachinsdevops/sample_teamcity.git'
+
+        # Set up the Git remote with the URL
+        subprocess.run(['git', 'remote', 'add', 'origin', remote_url], check=True)
+
+        # Fetch all remote branches
+        subprocess.run(['git', 'fetch', '--all'], check=True)
 
         # Command to get the latest branch name
         command = 'git for-each-ref --sort=-committerdate --format "%(refname:short)" refs/remotes/origin/ | head -n 1'
@@ -29,7 +35,7 @@ def checkout_latest_branch():
             # Remove 'origin/' prefix if present
             branch_name = latest_branch.split('/', 1)[-1]
 
-            # Checkout the latest branch using HTTP URL and personal access token
+            # Checkout the latest branch
             subprocess.run(['git', 'checkout', '-b', branch_name, f'remotes/origin/{latest_branch}'], check=True)
             print(f"Checked out latest branch: {latest_branch}")
         else:
